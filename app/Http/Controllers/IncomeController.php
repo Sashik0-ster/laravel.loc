@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Incomes\IncomesRequest;
+use App\Http\Requests\Auth\Auth\Incomes\IncomesRequest;
 use App\Models\Income;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -30,5 +30,10 @@ class IncomeController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Дохід успішно додано!');
+    }
+
+    public function delete()
+    {
+        //
     }
 }
