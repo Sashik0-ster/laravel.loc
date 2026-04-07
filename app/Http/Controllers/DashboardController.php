@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Income;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,12 +20,11 @@ class DashboardController extends Controller
     {
         $authUser = Auth::user();
 
-        $incomes = DB::table('incomes')->paginate(10);
-        $sum = DB::table('incomes')->sum('amount');
-        $users = DB::table('users')->paginate(10);
+        $incomes = Income::where('user_id', Auth::id())
+            ->latest() // нові зверху
+            ->paginate(4);
 
-
-
-        return view('pages.dashboard',compact(['incomes', 'sum', 'users', 'authUser']));
+        return view('pages.dashboard',compact(['incomes', 'authUser']));
     }
 }
+

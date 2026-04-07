@@ -3,36 +3,10 @@
 @section('content')
 
     <div class="d-flex justify-content-between ">
-        <div class="d-flex flex-row mb-2 align-items-center">
-            <label for="sort">Сортувати: </label>
-            <div class="p-2">
-                <select class="form-select form-select-sm" aria-label="Small select example">
-                    <option selected>дата</option>
-                    <option value="1">нові</option>
-                    <option value="2">старі</option>
-                    <option value="3">всі</option>
-                </select>
-            </div>
-            <div class="p-2">
-                <select class="form-select form-select-sm" aria-label="Small select example">
-                    <option selected>сума</option>
-                    <option value="1">най більша</option>
-                    <option value="2">най меньша</option>
-                    <option value="3">всі</option>
-                </select>
-            </div>
-            <div class="p-2">
-                <select class="form-select form-select-sm" aria-label="Small select example">
-                    <option selected>сума</option>
-                    <option value="1">най більша</option>
-                    <option value="2">най меньша</option>
-                    <option value="3">всі</option>
-                </select>
-            </div>
-        </div>
+
         <div class="d-flex flex-row mb-3">
             <div class="p-2">
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                <button type="button" class="btn btn-teal" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">Додати запис
                 </button>
                 <!-- Modal -->
@@ -111,7 +85,7 @@
                 </form>
             </div>
             <div class="p-2">
-                <button type="button" class="btn btn-secondary btn-sm">Видалити запис</button>
+                <button type="button" class="btn btn-outline">Видалити запис</button>
             </div>
         </div>
     </div>
@@ -119,6 +93,7 @@
 
     <div>
         <div class="period-grid text-center ">
+
             @foreach($incomes as $income)
                 <x-card>
                     <x-slot:header>
@@ -144,8 +119,87 @@
                 </x-card>
             @endforeach
         </div>
-        <div class="d-flex justify-content-end">
-            {{ $incomes->links() }}
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <div class="d-flex flex-row align-items-center gap-2">
+                <span class="text-muted small fw-bold">Сортувати:</span>
+
+                <select class="form-select form-select-sm" style="width: auto;">
+                    <option selected disabled>Дата</option>
+                    <option value="new">Спочатку нові</option>
+                    <option value="old">Спочатку старі</option>
+                </select>
+
+                <select class="form-select form-select-sm" style="width: auto;">
+                    <option selected disabled>Сума</option>
+                    <option value="desc">Найбільша</option>
+                    <option value="asc">Найменша</option>
+                </select>
+
+                <select class="form-select form-select-sm" style="width: auto;">
+                    <option selected disabled>Категорія</option>
+                    <option value="all">Всі</option>
+                    {{-- Тут можна додати категорії динамічно --}}
+                </select>
+            </div>
+
+            <div class="pagination-wrapper">
+                {{ $incomes->links() }}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="row align-items-start">
+
+            <div class="col-md-8">
+                <table class="table table-hover border border-info-subtle">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($allIncomes as $allIncome)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{$allIncome->title}}</td>
+                            <td>{{$allIncome->amount}} {{$allIncome->currency}}</td>
+                            <td>{{$allIncome->category}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 col-md-4 ">
+                <div>
+                    <div class="progress my-3" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar text-bg-success" style="width: 25%">25%</div>
+                    </div>
+                    <div class="progress my-3" role="progressbar" aria-label="Info example" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar text-bg-info" style="width: 50%">50%</div>
+                    </div>
+                    <div class="progress my-3" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar text-bg-error" style="width: 70%">70%</div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>
+                    <li class="list-group-item">And a fifth one</li>
+                    <li class="list-group-item">And a fifth one</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 

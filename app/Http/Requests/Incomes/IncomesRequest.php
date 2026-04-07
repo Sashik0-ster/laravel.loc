@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Auth\Auth\Incomes;
+namespace App\Http\Requests\Incomes;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;

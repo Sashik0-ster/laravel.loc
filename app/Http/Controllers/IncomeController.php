@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\Auth\Incomes\IncomesRequest;
+use App\Http\Requests\Incomes\IncomesRequest;
 use App\Models\Income;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class IncomeController extends Controller
 {
     public function index()
     {
-        $incomes = DB::table('incomes')->paginate(4);
-        return view('pages.income', compact('incomes'));
+        $incomes = Income::where('user_id', Auth::id())
+            ->latest() // нові зверху
+            ->paginate(4);
+
+        $allIncomes = Income::where('user_id', Auth::id())
+            ->get();
+
+        return view('pages.income', compact('incomes', 'allIncomes'));
     }
 
     public function create(IncomesRequest $request)
