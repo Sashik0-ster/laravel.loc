@@ -20,8 +20,11 @@ class Income extends Model
     protected $fillable = [
         'title',
         'amount',
+        'currency',
         'entry_date',
         'description',
+        'category',
+        'user_id',
     ];
 
     public function user(): BelongsTo

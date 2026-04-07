@@ -12,9 +12,7 @@
     @endif
 
     @if(isset($metricbox))
-        <div class="mt-4 border-t pt-2">
-            {{ $metricbox }}
-        </div>
+        {{$metricbox}}
     @endif
 
 </div>

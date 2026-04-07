@@ -10,6 +10,6 @@
             </svg>
             <div class="notif-dot"></div>
         </div>
-        <a style="text-decoration: none" href="{{route('login')}}"> <div class="avatar">S</div></a>
+        <a style="text-decoration: none" href="{{route('logout')}}"> <div class="avatar">S</div></a>
     </div>
 </header>

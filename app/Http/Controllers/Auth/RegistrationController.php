@@ -10,20 +10,20 @@ use Illuminate\Support\Facades\Hash;
 class RegistrationController extends Controller
 {
 
-    public function index()
+    public function showRegistrationForm()
     {
         return view('pages.forms.register');
     }
 
-    public function store(RegistrationRequest $request)
+    public function registration(RegistrationRequest $request)
     {
         $data = $request->validated();
 
         $data['password'] = Hash::make($data['password']);
 
-        $users = User::create($data);
+        User::create($data);
 
-        return redirect()->route('dashboard',compact('users'));
+        return redirect()->intended('login')->withErrors('status', 'Реєстрація успішна.');
     }
 
 }

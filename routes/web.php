@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\GoalController;
+
 //use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SavingController;
@@ -16,26 +17,33 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::middleware(['auth'])->group(function () {
 
 //* Rout Sidebar *//
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('income', [IncomeController::class, 'index'])->name('income');
-Route::get('expenses', [ExpensesController::class, 'index'])->name('expenses');
-Route::get('saving', [SavingController::class, 'index'])->name('saving');
-Route::get('goal', [GoalController::class, 'index'])->name('goal');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('income', [IncomeController::class, 'index'])->name('income');
+    Route::get('expenses', [ExpensesController::class, 'index'])->name('expenses');
+    Route::get('saving', [SavingController::class, 'index'])->name('saving');
+    Route::get('goal', [GoalController::class, 'index'])->name('goal');
 
-//** Registration  *//
-Route::get('registration', [RegistrationController::class, 'index'])->name('registration');
-Route::post('registration', [RegistrationController::class, 'store'])->name('registration.store');
+//*Insert Incomes *//
+    Route::post('create', [IncomeController::class, 'create'])->name('incomes.create');
 
-
-//** Login  *//
-
-Route::get('login', [LoginController::class, 'index'])->name('login');
 
 
 //** LogOut  *//
+    Route::get('logout', [LogOutController::class, 'logout'])->name('logout');
 
-Route::get('logout', [LogOutController::class, 'index'])->name('logout');
+});
+
+
+Route::middleware(['guest'])->group(function () {
+
+    //** Login  *//
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');
+    Route::post('login', [LoginController::class, 'login'])->name('login');
+
+    //** Registration  *//
+    Route::get('registration', [RegistrationController::class, 'showRegistrationForm'])->name('registration');
+    Route::post('registration', [RegistrationController::class, 'registration'])->name('registration.store');
+});

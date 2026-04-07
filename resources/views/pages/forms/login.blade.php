@@ -33,7 +33,8 @@
                         <div class="card-body p-4">
                             <h3 class="text-center mb-4">Вхід</h3>
 
-                            <form action="{{ route('dashboard') }}" method="get">
+                            <form action="{{ route('login') }}" method="post">
+
                                 @csrf
 
                                 <div class="mb-3">
@@ -53,18 +54,22 @@
                                 </div>
 
                                 <div class="m-3 d-flex flex-column gap-2">
-                                    <button type="submit"
-                                            class="btn btn-primary w-100 py-2 d-flex justify-content-center align-items-center">
-                                        Вхід
-                                    </button>
+                                    <a href="{{ route('login') }}">
+                                        <button type="submit"
+                                                class="btn btn-primary w-100 py-2 d-flex justify-content-center align-items-center">
+                                            Вхід
+                                        </button>
+                                    </a>
 
                                     <a href="{{ route('registration') }}"
                                        class="btn btn-primary w-100 py-2 d-flex justify-content-center align-items-center">
                                         Реєстрація
                                     </a>
                                 </div>
-
+                                @error('error')
+                                <div class="text-danger small">{{ $message }}</div> @enderror
                             </form>
+
 
                         </div>
                     </div>

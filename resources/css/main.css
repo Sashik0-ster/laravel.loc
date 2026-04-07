@@ -516,9 +516,9 @@ body {
 }
 
 .period-metrics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr;*/
+    /*gap: 12px;*/
 }
 
 .metric-box {
@@ -761,3 +761,107 @@ body {
     .bottom-grid { grid-template-columns: 1fr; }
     .period-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ─────────────────────────────────────────
+    Pagination style
+───────────────────────────────────────── */
+
+.pagination {
+    gap: 6px; /* Відступ між кнопками */
+    border: none;
+}
+
+/* Загальний вигляд кнопок (як неактивні пункти меню) */
+.pagination .page-link {
+    background-color: var(--sidebar-bg); /* Темний фон як у сайдбарі */
+    color: rgba(255, 255, 255, 0.55);   /* Колір як у .nav-item */
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.18s ease;
+}
+
+/* Ефект при наведенні (як у .nav-item:hover) */
+.pagination .page-link:hover {
+    background-color: rgba(0, 201, 177, 0.1) ;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Активна сторінка (копіює стиль .nav-item.active) */
+.pagination .page-item.active .page-link {
+    background-color: rgba(0, 201, 177, 0.1) !important;
+    color: var(--accent-teal) !important;
+    border: 1px solid var(--accent-teal) !important;
+}
+
+/* Стан "Disabled" (недоступні стрілки) */
+.pagination .page-item.disabled .page-link {
+    background-color: var(--sidebar-bg);
+    color: var(--accent-teal) !important;
+    border-color: rgba(255, 255, 255, 0.03);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Стан фокусу */
+.pagination .page-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 201, 177, 0.15);
+}
+
+/* ─────────────────────────────────────────
+    Modal window
+───────────────────────────────────────── */
+
+/* Стилізація модального вікна */
+.custom-modal {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+}
+
+.custom-modal .modal-header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+}
+
+.custom-modal .modal-title {
+    color: var(--text-primary);
+    font-weight: 800;
+}
+
+.custom-modal .modal-body {
+    padding: 24px;
+}
+
+/* Кастомні інпути */
+.custom-input {
+    background: var(--bg-main);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.custom-input:focus {
+    background: #fff;
+    border-color: var(--accent-teal);
+    box-shadow: 0 0 0 4px rgba(0, 201, 177, 0.1);
+    outline: none;
+}
+
+.form-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    display: block;
+}
+

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
             $table->string('title');
-            $table->decimal('amount', 15, 2);
-            $table->date('entry_date');
+            $table->decimal('amount', 15, 3);
+            $table->string('currency', 3)->default('USD');
+            $table->string('category')->nullable();
             $table->text('description')->nullable();
+            $table->date('entry_date');
             $table->timestamps();
         });
     }
