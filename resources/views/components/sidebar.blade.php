@@ -1,4 +1,8 @@
-<aside class="sidebar">
+<button class="sidebar-toggle d-md-none" id="sidebarToggle">
+    <span></span><span></span><span></span>
+</button>
+
+<aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
         <div class="logo-img">
             <div class="logo-hp">Sashik0<span>Product</span></div>
@@ -29,3 +33,5 @@
         </div>
     </div>
 </aside>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
