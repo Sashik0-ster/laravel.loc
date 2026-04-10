@@ -85,6 +85,7 @@
             </x-card>
         @endforeach
     </div>
+        <div class="col-4">{{ $incomes->links() }}</div>
 
     {{-- SORT + PAGINATION --}}
     <div class="d-flex justify-content-between align-items-center mt-2 mb-4 flex-wrap gap-3">
@@ -105,7 +106,6 @@
                 <option value="all">Всі</option>
             </select>
         </div>
-        <div>{{ $incomes->links() }}</div>
     </div>
 
     {{-- TABLE --}}

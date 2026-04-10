@@ -16,7 +16,7 @@
 
 <body>
 
-<div>
+<div class="burger">
     <x-sidebar :items="$sidebarItems"/>
 </div>
 
