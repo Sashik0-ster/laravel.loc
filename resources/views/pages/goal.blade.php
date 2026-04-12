@@ -33,7 +33,7 @@
                         <x-goals-card :goal="$goal" class="justify-content-center">
 
                             <x-slot:img>
-                                <img src="https://picsum.photos/300/300" class="rounded mx-auto d-block"
+                                <img src="https://picsum.photos/200/200" class="rounded mx-auto d-block"
                                      alt="Goal {{ $loop->iteration }}">
                             </x-slot:img>
 
