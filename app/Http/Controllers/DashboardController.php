@@ -22,9 +22,13 @@ class DashboardController extends Controller
 
         $incomes = Income::where('user_id', Auth::id())
             ->latest() // нові зверху
-            ->paginate(4);
+            ->paginate(4, ['*'], 'cards_page');
 
-        return view('pages.dashboard',compact(['incomes', 'authUser']));
+        $allIncomes = Income::where('user_id', Auth::id())
+            ->orderBy('amount', 'desc')
+            ->paginate(10, ['*'], 'table_page');
+
+        return view('pages.dashboard',compact(['incomes', 'authUser', 'allIncomes']));
     }
 }
 

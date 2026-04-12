@@ -12,11 +12,11 @@ class IncomeController extends Controller
     {
         $incomes = Income::where('user_id', Auth::id())
             ->latest() // нові зверху
-            ->paginate(4);
+            ->paginate(4, ['*'], 'cards_page');
 
         $allIncomes = Income::where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->orderBy('amount', 'desc')
+            ->paginate(10, ['*'], 'table_page');
 
         return view('pages.income', compact('incomes', 'allIncomes'));
     }
