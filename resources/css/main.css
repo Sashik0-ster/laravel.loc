@@ -1031,6 +1031,27 @@ body {
     letter-spacing: -0.5px;
 }
 
+/* ─── CAROUSEL CUSTOM ─── */
+.carousel-control-prev,
+.carousel-control-next {
+    margin: -10px;
+    width: 50px !important;
+    z-index: 5;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* Виправлення іконок для темної теми */
+.carousel-dark .carousel-control-prev-icon,
+.carousel-dark .carousel-control-next-icon {
+    filter: none !important; /* Якщо стрілки погано видно */
+}
+
 @media (max-width: 480px) {
     .auth-card {
         padding: 12px;
@@ -1067,8 +1088,8 @@ body {
 
 @media (max-width: 768px) {
     .topbar {
-        border-radius: 0;
-        padding: 0 12px 0 56px;
+        border-radius: 25px;
+        padding: 0 12px 0 25px;
         height: auto;
         min-height: 60px;
         flex-wrap: wrap;
@@ -1088,8 +1109,8 @@ body {
 
 @media (max-width: 480px) {
     .topbar {
-        padding: 8px 10px 8px 50px;
-        border-radius: 0;
+        padding: 8px 5px 8px 20px;
+        border-radius: 25px;
     }
 
     .topbar-actions h2 {

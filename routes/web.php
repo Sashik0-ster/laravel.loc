@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('create', [IncomeController::class, 'create'])->name('incomes.create');
     Route::delete('/incomes/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
 
+//*Insert Goals *//
+    Route::post('create', [GoalController::class, 'create'])->name('goals.create');
 
 //** LogOut  *//
     Route::get('logout', [LogOutController::class, 'logout'])->name('logout');

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -21,12 +20,17 @@ class User extends Authenticatable
     /**
      * Get the attributes that should be cast.
      *
-     * @return HasMany|User
+     * @return HasMany
      */
 
-    public function incomes(): User|HasMany
+    public function incomes(): HasMany
     {
         return $this->hasMany(Income::class);
+    }
+
+    public function goals(): HasMany
+    {
+        return $this->hasMany(Goal::class);
     }
     protected function casts(): array
     {

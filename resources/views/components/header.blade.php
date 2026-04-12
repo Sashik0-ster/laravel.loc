@@ -11,7 +11,7 @@
             <div class="notif-dot"></div>
         </div>
         <a style="text-decoration: none" href="{{ route('logout') }}">
-            <div class="avatar">S</div>
+            <div class="avatar">X</div>
         </a>
     </div>
 </header>

@@ -28,17 +28,17 @@ if (toggle) {
 
 /* ─── DELETE BUTTON ─── */
 
-const deleteButton = document.getElementById('deleteButton');
+const deleteIncomes = document.getElementById('deleteIncomes');
 
-if (deleteButton) {
-    deleteButton.addEventListener('click', () => {
+if (deleteIncomes) {
+    deleteIncomes.addEventListener('click', () => {
         document.querySelectorAll('[data-close]').forEach(closeCard => {
             closeCard.classList.toggle('d-none');
         });
     });
 }
-deleteButton.addEventListener('click', () => {
-    console.log('deleteButton');
+deleteIncomes.addEventListener('click', () => {
+    console.log('deleteIncomes');
 })
 
 document.querySelectorAll('[data-close]').forEach(closeCard => {
@@ -47,7 +47,7 @@ document.querySelectorAll('[data-close]').forEach(closeCard => {
     });
 });
 
-document.querySelectorAll('[data-close]').forEach(btn => {
+/*document.querySelectorAll('[data-close]').forEach(btn => {
     btn.addEventListener('click', async () => {
         const id = btn.dataset.id; // берём id из атрибута
 
@@ -63,6 +63,44 @@ document.querySelectorAll('[data-close]').forEach(btn => {
             window.location.reload();
         } else {
             alert('Помилка при видаленні');
+        }
+    });
+});*/
+
+document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+        // 1. Підтвердження дії
+        if (!confirm('Ви впевнені, що хочете видалити цей запис?')) return;
+
+        const id = btn.dataset.id;
+        const row = btn.closest('.income-item'); // Або інший селектор вашого контейнера
+
+        try {
+            const response = await fetch(`/incomes/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                }
+            });
+
+            if (response.ok) {
+                // 2. "Живе" видалення без перезавантаження
+                if (row) {
+                    row.style.transition = 'opacity 0.3s';
+                    row.style.opacity = '0';
+                    setTimeout(() => row.remove(), 300);
+                } else {
+                    window.location.reload();
+                }
+            } else {
+                const errorData = await response.json();
+                alert(`Помилка: ${errorData.message || 'Не вдалося видалити'}`);
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('Сталася помилка мережі. Спробуйте пізніше.');
         }
     });
 });

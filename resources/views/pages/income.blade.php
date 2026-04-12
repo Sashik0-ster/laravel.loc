@@ -7,7 +7,7 @@
             <button type="button" class="btn btn-teal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Додати запис
             </button>
-            <button type="button" class="btn btn-outline" id="deleteButton">Видалити запис</button>
+            <button type="button" class="btn btn-outline" id="deleteIncomes">Видалити запис</button>
         </div>
     </div>
 
