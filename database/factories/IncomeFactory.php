@@ -11,14 +11,16 @@ class IncomeFactory extends Factory
 
     public function definition(): array
     {
+        $faker = \Faker\Factory::create();
+
         return [
-            'user_id' => $this->faker->numberBetween(1, 10),
-            'title' => $this->faker->word(),
-            'amount' => $this->faker->randomFloat(2, 10),
-            'currency' => $this->faker->randomElement(['USD', 'EUR', 'PLN', 'UAH']),
-            'category' => $this->faker->word(),
-            'entry_date' => $this->faker->date(),
-            'description' => $this->faker->text(),
+            'user_id' => $faker->numberBetween(1, 10),
+            'title' => $faker->word(),
+            'amount' => $faker->randomFloat(2, 10),
+            'currency' => $faker->randomElement(['USD', 'EUR', 'PLN', 'UAH']),
+            'category' => $faker->word(),
+            'entry_date' => $faker->date(),
+            'description' => $faker->text(),
         ];
     }
 }
