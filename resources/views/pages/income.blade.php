@@ -166,7 +166,7 @@
                         </tbody>
                     </table>
 
-                    <div class="mt-3">git
+                    <div class="mt-3">
                         <div class="pagination-wrapper">
                             {{ $allIncomes->links('pagination::bootstrap-5') }}
                         </div>
