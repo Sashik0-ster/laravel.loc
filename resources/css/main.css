@@ -1059,7 +1059,7 @@ body {
 
     .carousel-control-prev,
     .carousel-control-next {
-        display: none;
+        margin-bottom: 200px;
     }
 }
 
@@ -1092,7 +1092,7 @@ body {
 
     .carousel-control-prev,
     .carousel-control-next {
-        display: none;
+        margin-bottom: 200px;
     }
 }
 
