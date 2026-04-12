@@ -7,7 +7,9 @@
             <button type="button" class="btn btn-teal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Додати запис
             </button>
-            <button type="button" class="btn btn-outline">Видалити запис</button>
+            <button type="button" class="btn btn-outline" id="deleteButton">Видалити
+                запис
+            </button>
         </div>
     </div>
 
@@ -68,26 +70,50 @@
         </x-slot:footer>
     </x-modal>
 
-    {{-- CARDS --}}
-    <div class="period-grid text-center mb-4">
-        @foreach($incomes as $income)
-            <x-card>
-                <x-slot:header>
-                    <h4 class="text-lg font-bold mb-2">{{ $income->title }}</h4>
-                </x-slot:header>
-                <x-slot:bodycard>
-                    <span class="period-link">{{ $income->amount }} {{ $income->currency }}</span>
-                    <span class="period-link">{{ $income->description }}</span>
-                </x-slot:bodycard>
-                <x-slot:metricbox>
-                    <x-metric-box :label="$income->category" :value="$income->entry_date"/>
-                </x-slot:metricbox>
-            </x-card>
-        @endforeach
+    {{-- Cards --}}
+    <div class="container-fluid text-center m-1">
+        <div class="row align-items-start m-3">
+            @foreach($incomes as $income)
+                <div class="col-12 col-xl-3">
+                    <x-card class="h-100">
+
+                        <x-slot:close>
+                            <div class="d-flex justify-content-end">
+                                <button class="metric-value ms-auto d-none"
+                                        data-close
+                                        data-id="{{ $income->id }}"
+                                        aria-label="Закрыть">✕
+                                </button>
+                            </div>
+                        </x-slot:close>
+
+                        <x-slot:header>
+                            <h4 class="text-lg font-bold mb-2 text-truncate">{{ $income->title }}</h4>
+                        </x-slot:header>
+
+                        <x-slot:bodycard>
+                            <p class="period-link mb-1">
+                                {{ number_format($income->amount, 2) }} {{ $income->currency }}
+                            </p>
+                            <p class="period-link mb-0 text-truncate" title="{{ $income->description }}">
+                                {{ $income->description }}
+                            </p>
+                        </x-slot:bodycard>
+
+                        <x-slot:metricbox>
+                            <x-metric-box :label="$income->category" :value="$income->entry_date"/>
+                        </x-slot:metricbox>
+
+                    </x-card>
+                </div>
+            @endforeach
+        </div>
     </div>
-        <div class="col-4">{{ $incomes->links() }}</div>
 
     {{-- SORT + PAGINATION --}}
+    <div class="col-12 d-flex justify-content-center justify-content-md-start">
+        {{ $incomes->links('pagination::bootstrap-5') }}
+    </div>
     <div class="d-flex justify-content-between align-items-center mt-2 mb-4 flex-wrap gap-3">
         <div class="d-flex flex-wrap align-items-center gap-2">
             <span class="text-muted small fw-bold">Сортувати:</span>
@@ -108,49 +134,77 @@
         </div>
     </div>
 
+
     {{-- TABLE --}}
-    <div class="row align-items-start g-3">
-        <div class="col-12 col-md-8">
-            <div class="table-responsive">
-                <table class="table table-hover border border-info-subtle">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Назва</th>
-                        <th>Сума</th>
-                        <th>Категорія</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($allIncomes as $allIncome)
+    <div class="container-fluid g-3">
+        <div class="row align-items-start">
+
+            <div class="col-12 col-md-8">
+                <div class="table-responsive card p-3 shadow-sm">
+                    <table class="table table-hover">
+                        <thead class="table-light">
                         <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <td>{{ $allIncome->title }}</td>
-                            <td>{{ $allIncome->amount }} {{ $allIncome->currency }}</td>
-                            <td>{{ $allIncome->category }}</td>
+                            <th>#</th>
+                            <th>Назва</th>
+                            <th>Сума</th>
+                            <th>Категорія</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($allIncomes as $allIncome)
+                            <tr>
+                                <th>{{ $loop->iteration }}</th>
+                                <td>{{ $allIncome->title }}</td>
+                                <td>
+                                    <strong>{{ number_format($allIncome->amount, 2, '.', ' ') }}</strong> {{ $allIncome->currency }}
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark">{{ $allIncome->category }}</span>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                    <div class="mt-3">git
+                        <div class="pagination-wrapper">
+                            {{ $allIncomes->links('pagination::bootstrap-5') }}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="progress my-3" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar text-bg-success" style="width: 25%">25%</div>
+
+            <div class="col-12 col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5 class="mb-3">Прогрес за категоріями</h5>
+
+                    <div class="progress my-3" style="height: 20px;">
+                        <div class="progress-bar text-bg-success" style="width: 25%">25%</div>
+                    </div>
+                    <div class="progress my-3" style="height: 20px;">
+                        <div class="progress-bar text-bg-info" style="width: 50%">50%</div>
+                    </div>
+                    <div class="progress my-3" style="height: 20px;">
+                        <div class="progress-bar text-bg-danger" style="width: 70%">70%</div>
+                    </div>
+
+                    <ul class="list-group mt-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Основний дохід
+                            <span class="badge bg-primary rounded-pill">12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Фріланс
+                            <span class="badge bg-primary rounded-pill">5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Подарунки
+                            <span class="badge bg-primary rounded-pill">2</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="progress my-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar text-bg-info" style="width: 50%">50%</div>
-            </div>
-            <div class="progress my-3" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar text-bg-danger" style="width: 70%">70%</div>
-            </div>
-            <ul class="list-group mt-3">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
-            </ul>
+
         </div>
     </div>
 

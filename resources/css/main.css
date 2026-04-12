@@ -454,7 +454,7 @@ body {
 ───────────────────────────────────────── */
 .content {
     padding: 24px 28px;
-    flex: 1;
+    /*flex: 1;*/
 }
 
 /* ─────────────────────────────────────────
@@ -566,7 +566,6 @@ body {
 .period-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
     margin-bottom: 24px;
 }
 
@@ -577,6 +576,7 @@ body {
     box-shadow: var(--shadow);
     transition: box-shadow 0.2s, transform 0.2s;
     animation: fadeUp 0.4s ease both;
+    margin-bottom: 10px;
 }
 
 .period-card:hover {
@@ -1046,8 +1046,59 @@ body {
         margin-left: 10px;
         width: 100%;
     }
-    .burger{
+
+    .burger {
         height: 50px;
     }
 }
 
+@media (max-width: 768px) {
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .pagination .page-link {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        border-radius: 0;
+        padding: 0 12px 0 56px;
+        height: auto;
+        min-height: 60px;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .topbar-actions h2 {
+        font-size: 16px;
+    }
+
+    .topbar-right {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar {
+        padding: 8px 10px 8px 50px;
+        border-radius: 0;
+    }
+
+    .topbar-actions h2 {
+        font-size: 14px;
+    }
+
+    .notif-btn,
+    .avatar {
+        width: 30px;
+        height: 30px;
+    }
+}

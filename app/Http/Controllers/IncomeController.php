@@ -15,7 +15,8 @@ class IncomeController extends Controller
             ->paginate(4);
 
         $allIncomes = Income::where('user_id', Auth::id())
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('pages.income', compact('incomes', 'allIncomes'));
     }
@@ -37,8 +38,9 @@ class IncomeController extends Controller
         return redirect()->back()->with('success', 'Дохід успішно додано!');
     }
 
-    public function delete()
+    public function destroy(Income $income)
     {
-        //
+        $income->delete();
+        return response()->json(['success' => true]);
     }
 }

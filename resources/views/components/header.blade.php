@@ -1,8 +1,8 @@
 <header class="topbar">
-    <div class="topbar-actions">
-        <h2 class="fw-serif text-dark">{{$title}}</h2>
+    <div class="topbar-actions" style="min-width: 0;">
+        <h2 class="fw-serif text-dark text-truncate">{{ $title }}</h2>
     </div>
-    <div class="topbar-right">
+    <div class="topbar-right flex-shrink-0">
         <div class="notif-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
@@ -10,6 +10,8 @@
             </svg>
             <div class="notif-dot"></div>
         </div>
-        <a style="text-decoration: none" href="{{route('logout')}}"> <div class="avatar">S</div></a>
+        <a style="text-decoration: none" href="{{ route('logout') }}">
+            <div class="avatar">S</div>
+        </a>
     </div>
 </header>
