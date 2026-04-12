@@ -1056,6 +1056,11 @@ body {
     .auth-card {
         padding: 12px;
     }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
 }
 
 @media (max-width: 770px) {
@@ -1083,6 +1088,11 @@ body {
     .pagination .page-link {
         padding: 4px 8px;
         font-size: 0.8rem;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
     }
 }
 
