@@ -26,12 +26,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('saving', [SavingController::class, 'index'])->name('saving');
     Route::get('goal', [GoalController::class, 'index'])->name('goal');
 
-//*Insert Incomes *//
-    Route::post('create', [IncomeController::class, 'create'])->name('incomes.create');
-    Route::delete('/incomes/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
+//* Incomes *//
+    Route::post('incomes', [IncomeController::class, 'store'])->name('incomes.store');
+    Route::delete('incomes/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
 
-//*Insert Goals *//
-    Route::post('create', [GoalController::class, 'create'])->name('goals.create');
+//* Goals *//
+    Route::post('goals', [GoalController::class, 'store'])->name('goals.store');
 
 //** LogOut  *//
     Route::get('logout', [LogOutController::class, 'logout'])->name('logout');

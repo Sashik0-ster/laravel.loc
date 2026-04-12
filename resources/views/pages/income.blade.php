@@ -12,7 +12,7 @@
     </div>
 
     {{-- Modal Component --}}
-    <x-modal id="staticBackdrop" title="Додати новий дохід" :action="route('incomes.create')">
+    <x-modal id="staticBackdrop" title="Додати новий дохід" :action="route('incomes.store')">
         <x-slot:body>
             <div class="mb-3">
                 <label class="form-label">Джерело доходу</label>

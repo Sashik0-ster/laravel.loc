@@ -21,7 +21,7 @@ class IncomeController extends Controller
         return view('pages.income', compact('incomes', 'allIncomes'));
     }
 
-    public function create(IncomesRequest $request)
+    public function store(IncomesRequest $request)
     {
         $data = $request->validated();
 

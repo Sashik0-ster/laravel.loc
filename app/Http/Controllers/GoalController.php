@@ -14,7 +14,7 @@ class GoalController extends Controller
         return view('pages.goal', compact('goals'));
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',

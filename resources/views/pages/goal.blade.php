@@ -75,7 +75,7 @@
 
     </div>
 
-    <x-modal id="staticBackdrop" title="Додати ціль" action="{{ route('goals.create') }}">
+    <x-modal id="staticBackdrop" title="Додати ціль" action="{{ route('goals.store') }}">
 
         <x-slot:body>
 
