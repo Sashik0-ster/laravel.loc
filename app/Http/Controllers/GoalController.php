@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Goal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function Laravel\Prompts\error;
 
 class GoalController extends Controller
@@ -10,8 +12,17 @@ class GoalController extends Controller
 
     public function index()
     {
-        $goals = auth()->user()->goals()->latest()->get();
-        return view('pages.goal', compact('goals'));
+        $goalsActive = Goal::where('user_id', Auth::id())
+            ->latest()
+            ->where('status', 'active')
+            ->get();
+
+        $goalsCompleted = Goal::where('user_id', Auth::id())
+            ->latest()
+            ->where('status', 'completed')
+            ->get();
+
+        return view('pages.goal', compact(['goalsActive', 'goalsCompleted']));
     }
 
     public function store(Request $request)

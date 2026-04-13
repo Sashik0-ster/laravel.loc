@@ -14,6 +14,7 @@ class Goal extends Model
         'user_id',
         'title',
         'description',
+        'currency',
         'target_amount',
         'collected_amount',
         'deadline',

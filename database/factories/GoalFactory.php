@@ -19,6 +19,7 @@ class GoalFactory extends Factory
             'user_id' => User::factory(),
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
+            'currency' => $this->faker->randomElement(['USD', 'EUR', 'PLN', 'UAH']),
             'target_amount' => $targetAmount,
             'collected_amount' => $collectedAmount,
             'deadline' => $this->faker->dateTimeBetween('now', '+1 year'),

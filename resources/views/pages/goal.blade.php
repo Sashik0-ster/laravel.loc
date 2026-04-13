@@ -13,64 +13,141 @@
             </div>
         </div>
 
-        <div id="carouselExampleIndicators" class="carousel carousel-dark slide ">
+        <div class="row">
+            <div class="col-12 col-xl-6  ">
+                <h5>Цілі</h5>
+                <div id="carouselExampleIndicators" class="carousel carousel-dark slide flex justify-content-center">
 
-            <div class="carousel-indicators">
-                @foreach($goals as $goal)
-                    <button type="button"
-                            data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide-to="{{ $loop->index }}"
-                            class="{{ $loop->first ? 'active' : '' }}"
-                            {{ $loop->first ? 'aria-current=true' : '' }}
-                            aria-label="Slide {{ $loop->iteration }}">
-                    </button>
-                @endforeach
-            </div>
-
-            <div class="carousel-inner">
-                @foreach($goals as $goal)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }} ">
-                        <x-goals-card :goal="$goal" class="justify-content-center">
-
-                            <x-slot:img>
-                                <img src="https://picsum.photos/200/200" class="rounded mx-auto d-block"
-                                     alt="Goal {{ $loop->iteration }}">
-                            </x-slot:img>
-
-                            <x-slot:footer>
-                                Дедлайн: {{ $goal->deadline->format('d.m.Y') }} •
-                                Статус: {{ $goal->status }}
-                            </x-slot:footer>
-
-                            <p>{{ $goal->description }}</p>
-
-                            <div class="progress mb-2">
-                                <div class="progress-bar" style="width: {{ $goal->progressPercent() }}%">
-                                    {{ $goal->progressPercent() }}%
-                                </div>
-                            </div>
-
-                            <small>
-                                Зібрано: {{ $goal->collected_amount }} грн
-                                з {{ $goal->target_amount }} грн
-                            </small>
-
-                        </x-goals-card>
+                    <div class="carousel-indicators">
+                        @foreach($goalsActive as $goalActive)
+                            <button type="button"
+                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide-to="{{ $loop->index }}"
+                                    class="{{ $loop->first ? 'active' : '' }}"
+                                    {{ $loop->first ? 'aria-current=true' : '' }}
+                                    aria-label="Slide {{ $loop->iteration }}">
+                            </button>
+                        @endforeach
                     </div>
-                @endforeach
+
+                    <div class="carousel-inner">
+                        @foreach($goalsActive as $goalActive)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }} ">
+                                <x-goals-card :goal="$goalActive">
+
+                                    <x-slot:img>
+                                        <img src="https://picsum.photos/200/200?random=2"
+                                             class="rounded mx-auto d-block"
+                                             alt="Goal {{ $loop->iteration }}">
+                                    </x-slot:img>
+
+                                    <x-slot:footer>
+                                        Дедлайн: <b
+                                            class="text-danger"> {{ $goalActive->deadline->format('d.m.Y') }}</b> •
+                                        Статус: <b class="text-success">  {{ $goalActive->status }}</b>
+                                    </x-slot:footer>
+
+                                    <p class="card-text"
+                                       style="height: 4.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                        {{ $goalActive->description }}
+                                    </p>
+
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" style="width: {{ $goalActive->progressPercent() }}%">
+                                            {{ $goalActive->progressPercent() }}%
+                                        </div>
+                                    </div>
+
+                                    <small class="btn-teal rounded-1 p-1 text-black">
+                                        <i> Зібрано: {{ $goalActive->collected_amount }} {{ $goalActive->currency }}</i>
+                                        <i> з {{ $goalActive->target_amount }} {{ $goalActive->currency }}</i>
+                                    </small>
+
+                                </x-goals-card>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
+                </div>
             </div>
+            <div class="col-12 col-xl-6  ">
+                <h5>Виконані цілі</h5>
+                <div id="completedGoalsCarousel" class="carousel carousel-dark slide flex justify-content-center">
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                    <div class="carousel-indicators">
+                        @foreach($goalsCompleted as $goalCompleted)
+                            <button type="button"
+                                    data-bs-target="completedGoalsCarousel"
+                                    data-bs-slide-to="{{ $loop->index }}"
+                                    class="{{ $loop->first ? 'active' : '' }}"
+                                    {{ $loop->first ? 'aria-current=true' : '' }}
+                                    aria-label="Slide {{ $loop->iteration }}">
+                            </button>
+                        @endforeach
+                    </div>
 
+                    <div class="carousel-inner">
+                        @foreach($goalsCompleted as $goalCompleted)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }} ">
+                                <x-goals-card :goal="$goalCompleted">
+
+                                    <x-slot:img>
+                                        <img src="https://picsum.photos/200/200?random=1"
+                                             class="rounded mx-auto d-block"
+                                             alt="Goal {{ $loop->iteration }}">
+                                    </x-slot:img>
+
+                                    <x-slot:footer>
+                                        Статус: <b class="text-info">{{ $goalCompleted->status }}</b>
+                                    </x-slot:footer>
+
+                                    <p class="card-text"
+                                       style="height: 4.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                        {{ $goalCompleted->description }}
+                                    </p>
+
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar"
+                                             style="width: {{ $goalCompleted->progressPercent() }}%">
+                                            {{ $goalCompleted->progressPercent() }}%
+                                        </div>
+                                    </div>
+
+                                    <small class="btn-teal rounded-1 p-1 text-black">
+                                        <i>
+                                            Зібрано: {{ $goalCompleted->collected_amount }} {{ $goalCompleted->currency }}</i>
+                                        <i> з {{ $goalCompleted->target_amount }} {{ $goalCompleted->currency }}</i>
+                                    </small>
+
+                                </x-goals-card>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#completedGoalsCarousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#completedGoalsCarousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
+                </div>
+            </div>
         </div>
 
     </div>
@@ -99,24 +176,36 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
-                <label for="target_amount" class="form-label">Потрібна сума (грн)</label>
-                <input type="number" class="form-control @error('target_amount') is-invalid @enderror"
-                       id="target_amount" name="target_amount" value="{{ old('target_amount') }}"
-                       placeholder="0.00" step="0.01" min="0">
-                @error('target_amount')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+            <div class="row">
+                <div class="col-8 mb-3">
+                    <label class="form-label" for="target_amount">Потрібна сума</label>
+                    <input type="number" class="form-control @error('target_amount') is-invalid @enderror"
+                           id="target_amount" name="target_amount" value="{{ old('target_amount') }}"
+                           placeholder="0.00" step="0.01" min="0">
+                    @error('target_amount')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-4 mb-3">
+                    <label class="form-label">Валюта</label>
+                    <select name="currency" class="form-select custom-input">
+                        <option value="USD">USD</option>
+                        <option value="PLN">PLN</option>
+                        <option value="UAH">UAH</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3">
-                <label for="collected_amount" class="form-label">Вже зібрано (грн)</label>
+                <label for="collected_amount" class="form-label">Вже зібрано</label>
                 <input type="number" class="form-control @error('collected_amount') is-invalid @enderror"
-                       id="collected_amount" name="collected_amount" value="{{ old('collected_amount', 0) }}"
+                       id="collected_amount" name="collected_amount" value="{{ old('collected_amount') }}"
                        placeholder="0.00" step="0.01" min="0">
                 @error('collected_amount')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+
             </div>
 
             <div class="mb-3">
